@@ -1,10 +1,10 @@
 let config = {
     state:{
-        count: 0
+        token: null
     },
-    mutations:{
-        increment (state){
-            state.count++
+    getters:{
+        iflogin(state){
+            return !!state.token
         }
     }
 }

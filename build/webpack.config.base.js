@@ -60,7 +60,7 @@ module.exports = {
             filename: "index.html",
             template: "./index.template.html",
             inject: true,
-            title: "Hello World"
+            title: "bibi-scanner!"
         }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output

@@ -1,12 +1,5 @@
 <template>
-    <div>
-        Hello World this Vue! {{$store.state.count}}
-        <button @click="add">+</button>
-        <router-link to="/">index</router-link>
-        <router-link to="/a">/a</router-link>
-        <router-link to="/b">/b</router-link>
-        <router-view></router-view>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -19,6 +12,30 @@ let router = new VueRouter(routerConfig)
 import storeConfig from "./store"
 let store = new Vuex.Store(storeConfig)
 
+router.beforeEach(async (to, from, next) => { //执行路由自己的钩子
+    let matched = to.matched
+    let beforeEachs = to.matched.filter(r => r.meta && r.meta.beforeEach).map(r => r.meta.beforeEach)
+    
+    for (let i = 0; i < beforeEachs.length; i++){
+        let beforeEach = beforeEachs[i]
+        let result = await new Promise((resolve, reject) => {
+            beforeEach(to, from, function(x){
+                resolve(x)
+            }, {
+                router,
+                store
+            })
+        })
+
+        if (result !== null){
+            next(result)
+            return
+        }
+    }
+
+    next()
+})
+
 export default {
     router,
     store,
@@ -29,9 +46,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-div{
-    color: red;
-}
-</style>

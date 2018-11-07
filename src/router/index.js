@@ -1,17 +1,36 @@
-import pageA from "../pages/page-a.vue"
+import index from "../pages/index.vue"
+import login from "../pages/login.vue"
 import pageB from "../pages/page-b.vue"
 
 let routerConfig = {
     mode: "history",
     routes: [
         {
-            path: "/a",
-            component: pageA
+            path: "/",
+            meta:{
+                beforeEach(to, from, next, { store }){
+                    if(store.getters.iflogin){
+                        next()
+                    } else {
+                        next("/login")
+                    }
+                }
+            },
+            component: index
         },
         {
-            path: "/b",
-            component: pageB
-        },
+            path: "/login",
+            component: login,
+            meta:{
+                beforeEach(to, from, next, { store }){
+                    if(store.getters.iflogin){
+                        next("/")
+                    } else {
+                        next()
+                    }
+                }
+            },
+        }
     ]
 }
 
