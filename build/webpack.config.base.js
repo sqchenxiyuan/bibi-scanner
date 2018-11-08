@@ -48,6 +48,22 @@ module.exports = {
                     loader: "sass-loader" // 编译SCSS到CSS
                 }]
             },
+            {
+                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                loader: "url-loader",
+                options: {
+                    limit: 10000,
+                    name: "img/[name].[hash:7].[ext]"
+                }
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: "url-loader",
+                options: {
+                    limit: 10000,
+                    name: "fonts/[name].[hash:7].[ext]"
+                }
+            }
         ]
     },
     plugins: [
@@ -63,8 +79,6 @@ module.exports = {
             title: "bibi-scanner!"
         }),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "css/[name].[chunkhash:6].[contenthash:6].css",
             chunkFilename: "css/[id].[chunkhash:6].[contenthash:6].css"
         }),

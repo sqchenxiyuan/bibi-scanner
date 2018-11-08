@@ -8,6 +8,7 @@ let routerConfig = {
         {
             path: "/",
             meta:{
+                title: "登陆",
                 beforeEach(to, from, next, { store }){
                     if(store.getters.iflogin){
                         next()
@@ -22,6 +23,7 @@ let routerConfig = {
             path: "/login",
             component: login,
             meta:{
+                title: "登陆",
                 beforeEach(to, from, next, { store }){
                     if(store.getters.iflogin){
                         next("/")

@@ -5,12 +5,19 @@
 <script>
 import VueRouter from "vue-router"
 import Vuex from "vuex"
+import VueRouterTitle from "vue-router-title"
 
 import routerConfig from "./router"
 let router = new VueRouter(routerConfig)
 
 import storeConfig from "./store"
 let store = new Vuex.Store(storeConfig)
+
+VueRouterTitle({
+    defaultTitle: "bibi-scanner~~~",
+    router,
+    store
+})
 
 router.beforeEach(async (to, from, next) => { //执行路由自己的钩子
     let matched = to.matched
