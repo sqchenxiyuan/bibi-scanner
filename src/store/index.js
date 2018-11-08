@@ -2,7 +2,7 @@ import { resolve } from "path";
 
 let config = {
     state:{
-        token: null
+        token: "test"
     },
     getters:{
         iflogin(state){

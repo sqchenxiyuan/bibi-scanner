@@ -1,6 +1,10 @@
-import index from "../pages/index.vue"
 import login from "../pages/login.vue"
-import pageB from "../pages/page-b.vue"
+
+import indexFrame from "../frames/index.vue"
+import index from "../pages/index.vue"
+import tasks from "../pages/tasks.vue"
+import nodes from "../pages/nodes.vue"
+import plugins from "../pages/plugins.vue"
 
 let routerConfig = {
     mode: "history",
@@ -8,7 +12,7 @@ let routerConfig = {
         {
             path: "/",
             meta:{
-                title: "登陆",
+                title: "bibi烧猫器",
                 beforeEach(to, from, next, { store }){
                     if(store.getters.iflogin){
                         next()
@@ -17,7 +21,25 @@ let routerConfig = {
                     }
                 }
             },
-            component: index
+            component: indexFrame,
+            children:[
+                {
+                    path: "/",
+                    component: index
+                },
+                {
+                    path: "/tasks",
+                    component: tasks
+                },
+                {
+                    path: "/nodes",
+                    component: nodes
+                },
+                {
+                    path: "/plugins",
+                    component: plugins
+                },
+            ]
         },
         {
             path: "/login",
