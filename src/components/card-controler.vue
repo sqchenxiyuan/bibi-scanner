@@ -6,26 +6,28 @@
         <md-dialog :md-active.sync="newTaskDialogVisiable" style="width: 80vw;max-height: initial;">
             <md-dialog-title>添加新任务</md-dialog-title>
             <md-content style="padding: 20px">
-                <NewTaksForm @cancle="newTaskDialogVisiable = false" @submit="newTaskDialogVisiable = false"></NewTaksForm>
+                <NewTaskForm @cancel="newTaskDialogVisiable = false" @submit="newTaskDialogVisiable = false"></NewTaskForm>
             </md-content>
         </md-dialog>
         <md-dialog :md-active.sync="newNodeDialogVisiable" style="width: 80vw;max-height: initial;">
             <md-dialog-title>添加新节点</md-dialog-title>
             <md-content style="padding: 20px">
-                <NewTaksForm @cancle="newNodeDialogVisiable = false" @submit="newNodeDialogVisiable = false"></NewTaksForm>
+                <NewNodeForm @cancel="newNodeDialogVisiable = false" @submit="newNodeDialogVisiable = false"></NewNodeForm>
             </md-content>
         </md-dialog>
         <md-dialog :md-active.sync="newPluginDialogVisiable" style="width: 80vw;max-height: initial;">
             <md-dialog-title>添加新插件</md-dialog-title>
             <md-content style="padding: 20px">
-                <NewTaksForm @cancle="newPluginDialogVisiable = false" @submit="newPluginDialogVisiable = false"></NewTaksForm>
+                <NewPluginForm @cancel="newPluginDialogVisiable = false" @submit="newPluginDialogVisiable = false"></NewPluginForm>
             </md-content>
         </md-dialog>
     </md-card>
 </template>
 
 <script>
-import NewTaksForm from "../components/forms/newtask.vue"
+import NewTaskForm from "../components/forms/newtask.vue"
+import NewNodeForm from "../components/forms/newnode.vue"
+import NewPluginForm from "../components/forms/newplugin.vue"
 
 export default {
     data:()=>{
@@ -38,7 +40,9 @@ export default {
     methods:{
     },
     components: {
-        NewTaksForm
+        NewTaskForm,
+        NewNodeForm,
+        NewPluginForm
     }
 }
 </script>

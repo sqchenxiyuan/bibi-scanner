@@ -17,7 +17,7 @@
             </md-select>
         </md-field>
         <md-card-actions>
-            <md-button class="md-primary" @click="cancle">取消</md-button>
+            <md-button class="md-primary" @click="cancel">取消</md-button>
             <md-button class="md-primary" @click="submit">确认</md-button>
         </md-card-actions>
     </form>
@@ -46,8 +46,8 @@ export default {
         }
     },
     methods:{
-        cancle(){
-            this.$emit("cancle")
+        cancel(){
+            this.$emit("cancel")
         },
         submit(){
             this.$emit("submit")
