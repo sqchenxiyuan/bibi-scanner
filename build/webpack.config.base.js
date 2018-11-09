@@ -15,6 +15,11 @@ module.exports = {
         filename: "[name].[chunkhash:6].[contenthash:6].js",
         chunkFilename: "[name].[chunkhash:6].[contenthash:6].chunk.js"
     },
+    resolve:{
+        alias:{
+            "@cssvar": path.resolve(__dirname, "../src/styles/variables.scss"),
+        }
+    },
     module: {
         rules: [
             {
