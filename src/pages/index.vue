@@ -21,17 +21,25 @@
                 <p class="info-text md-title">已完成</p>
             </md-content>
         </div>
+        <div class="md-layout md-gutter" style="margin-top: 20px">
+            <span class="md-title">任务列表</span>
+        </div>
+        <div class="md-layout md-gutter" style="margin-top: 10px">
+            <TasksListCard class="md-layout-item"></TasksListCard>
+        </div>
     </div>
 </template>
 
 <script>
 import InfoCard from "../components/card-info.vue"
 import ControlerCard from "../components/card-controler.vue"
+import TasksListCard from "../components/cards/card-taskslist.vue"
 
 export default {
     components:{
         InfoCard,
-        ControlerCard
+        ControlerCard,
+        TasksListCard
     }
 }
 </script>
