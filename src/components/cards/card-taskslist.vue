@@ -1,5 +1,5 @@
 <template>
-    <md-card style="">
+    <md-card>
         <md-table style="table-layout:fixed;">
             <md-table-row>
                 <md-table-head md-numeric width="50px">序号</md-table-head>
@@ -14,7 +14,7 @@
                 <md-table-row :key="task.id">
                     <md-table-cell md-numeric width="50px">{{task.id}}</md-table-cell>
                     <md-table-cell>{{task.name}}</md-table-cell>
-                    <md-table-cell>{{task.createtime}}</md-table-cell>
+                    <md-table-cell>{{new Date(task.createtime)}}</md-table-cell>
                     <md-table-cell>{{statusName(task.status)}}</md-table-cell>
                     <md-table-cell>
                         <md-progress-spinner :class="task.process < 100 ? 'md-accent' : ''" :md-diameter="30" :md-stroke="3" :md-value="task.process"></md-progress-spinner>
@@ -39,9 +39,9 @@ export default {
         return {
             tasks:[
                 {id: 1, name: "任务1", createtime:Date.now(), status: TaskStatus.WAITING, process: 0 },
-                {id: 2, name: "任务2", createtime:Date.now(), status: TaskStatus.RUNNING, process: 0 },
+                {id: 2, name: "任务2", createtime:Date.now(), status: TaskStatus.RUNNING, process: 20 },
                 {id: 3, name: "任务3", createtime:Date.now(), status: TaskStatus.RUNNING, process: 10 },
-                {id: 4, name: "任务4", createtime:Date.now(), status: TaskStatus.FINSHED, process: 90 },
+                {id: 4, name: "任务4", createtime:Date.now(), status: TaskStatus.FINSHED, process: 100 },
                 {id: 5, name: "任务5", createtime:Date.now(), status: TaskStatus.FINSHED, process: 100 },
             ]
         }
