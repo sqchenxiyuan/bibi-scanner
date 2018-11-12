@@ -12,3 +12,7 @@ import 'vue-material/dist/theme/default.css'
 Vue.use(VueMaterial)
 
 import "material-design-icons/iconfont/material-icons.css"
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI)

@@ -5,6 +5,7 @@
             <md-tab id="tab-tasks" md-label="任务列表" to="/tasks"></md-tab>
             <md-tab id="tab-nodes" md-label="节点列表" to="/nodes"></md-tab>
             <md-tab id="tab-plugins" md-label="插件列表" to="/plugins"></md-tab>
+            <md-tab v-if="$route.name === 'task-detail'" id="tab-task-detail" md-label="任务详情" :to="$route.path"></md-tab>
         </md-tabs>
         <div class="md-layout md-alignment-top-center">
             <div class="md-layout-item md-size-80">
