@@ -12,13 +12,15 @@
             </div>
             <div class="md-layout">
                 <div class="md-layout-item" style="max-width: 70px">创建时间</div>
-                <div class="md-layout-item">{{new Date(task.createtime)}}</div>
+                <div class="md-layout-item">{{timeTranslate(task.createtime)}}</div>
             </div>
         </md-card-content>
     </md-card>
 </template>
 
 <script>
+import moment from "moment"
+
 const TaskStatus = {}
 TaskStatus.WAITING = 0
 TaskStatus.RUNNING = 1
@@ -37,6 +39,9 @@ export default {
                 default:
                     return "未知"
             }
+        },
+        timeTranslate(time){
+            return moment(time).format("YYYY-MM-DD")
         }
     }
 }
