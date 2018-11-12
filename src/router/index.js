@@ -5,6 +5,7 @@ import index from "../pages/index.vue"
 import tasks from "../pages/tasks.vue"
 import nodes from "../pages/nodes.vue"
 import plugins from "../pages/plugins.vue"
+import taskDetail from "../pages/task-detail.vue"
 
 let routerConfig = {
     mode: "history",
@@ -38,6 +39,11 @@ let routerConfig = {
                 {
                     path: "/plugins",
                     component: plugins
+                },
+                {
+                    path: "/tasks/:taskId",
+                    name: "task-detail",
+                    component: taskDetail
                 },
             ]
         },

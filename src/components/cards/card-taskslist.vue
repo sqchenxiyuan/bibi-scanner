@@ -14,13 +14,13 @@
                 <md-table-row :key="task.id">
                     <md-table-cell md-numeric width="50px">{{task.id}}</md-table-cell>
                     <md-table-cell>{{task.name}}</md-table-cell>
-                    <md-table-cell>{{new Date(task.createtime)}}</md-table-cell>
+                    <md-table-cell>{{timeTranslate(task.createtime)}}</md-table-cell>
                     <md-table-cell>{{statusName(task.status)}}</md-table-cell>
                     <md-table-cell>
                         <md-progress-spinner :class="task.process < 100 ? 'md-accent' : ''" :md-diameter="30" :md-stroke="3" :md-value="task.process"></md-progress-spinner>
                     </md-table-cell>
                     <md-table-cell>
-                        <md-button class="md-primary">详情</md-button>
+                        <md-button class="md-primary" @click="go2TaskDetail(task)">详情</md-button>
                     </md-table-cell>
                 </md-table-row>
             </template>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import moment from "moment"
+
 const TaskStatus = {}
 TaskStatus.WAITING = 0
 TaskStatus.RUNNING = 1
@@ -55,6 +57,17 @@ export default {
                 default:
                     return "未知"
             }
+        },
+        timeTranslate(time){
+            return moment(time).format("YYYY-MM-DD")
+        },
+        go2TaskDetail(task){
+            this.$router.push({
+                name: "task-detail",
+                params: {
+                    taskId: task.id
+                }
+            })
         }
     }
 }
