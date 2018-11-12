@@ -12,7 +12,7 @@ let routerConfig = {
         {
             path: "/",
             meta:{
-                title: "bibi烧猫器",
+                title: "bibi扫猫器",
                 beforeEach(to, from, next, { store }){
                     if(store.getters.iflogin){
                         next()
