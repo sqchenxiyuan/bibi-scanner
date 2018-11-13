@@ -2,7 +2,7 @@ import { login } from "../interfaces/login.js"
 
 let config = {
     state:{
-        token: ""
+        token: "test"
     },
     getters:{
         iflogin(state){
