@@ -1,8 +1,8 @@
-import { resolve } from "path";
+import { login } from "../interfaces/login.js"
 
 let config = {
     state:{
-        token: "test"
+        token: ""
     },
     getters:{
         iflogin(state){
@@ -12,7 +12,7 @@ let config = {
     actions:{
         async login({state}, {password}){
             //TODO: 登陆操作
-
+            
             state.token = "a token"
 
             return new Promise((resolve) => {

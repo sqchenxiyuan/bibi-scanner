@@ -13,6 +13,13 @@ let router = new VueRouter(routerConfig)
 import storeConfig from "./store"
 let store = new Vuex.Store(storeConfig)
 
+import axios from "./interfaces/axios-instance.js"
+
+axios.interceptors.request.use(function(config){
+    config.headers["X-USER-TOKEN"] = store.state.token
+    return config
+}, function(error){return Promise.reject(error)})
+
 VueRouterTitle({
     defaultTitle: "bibi-scanner~~~",
     router,
