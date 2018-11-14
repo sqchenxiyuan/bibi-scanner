@@ -31,6 +31,7 @@ def info():
 提供一个poc函数,返回正确或者失败
 
 ``` python
-def poc(url):
-    return True or false
+def poc(url): 127.0.0.1:80
+    #操作
+    return True or False
 ```
