@@ -1,5 +1,7 @@
 import { login } from "../interfaces/login.js"
 
+import sysinfoModule from "./sysinfo.js"
+
 let config = {
     state:{
         token: "test"
@@ -10,6 +12,9 @@ let config = {
         }
     },
     actions:{
+        init({dispatch}){
+            return dispatch("initmodule")
+        },
         async login({state}, {password}){
             //TODO: 登陆操作
             
@@ -21,6 +26,9 @@ let config = {
                 }, 1500)
             })
         }
+    },
+    modules:{
+        sysinfo: sysinfoModule
     }
 }
 

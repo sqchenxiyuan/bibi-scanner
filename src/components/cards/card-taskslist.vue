@@ -17,7 +17,9 @@
                     <md-table-cell>{{timeTranslate(task.createtime)}}</md-table-cell>
                     <md-table-cell>{{statusName(task.status)}}</md-table-cell>
                     <md-table-cell>
-                        <md-progress-spinner :class="task.process < 100 ? 'md-accent' : ''" :md-diameter="30" :md-stroke="3" :md-value="task.process"></md-progress-spinner>
+                        <el-progress type="circle" :width="50" 
+                            :status="task.progress === 1 ? 'success' : '' "
+                            :percentage="parseFloat((task.progress * 100).toFixed(2))"></el-progress>
                     </md-table-cell>
                     <md-table-cell>
                         <md-button class="md-primary" @click="go2TaskDetail(task)">详情</md-button>
@@ -29,6 +31,8 @@
 </template>
 
 <script>
+import { queryTasks } from "../../interfaces/tasks.js"
+
 import moment from "moment"
 
 const TaskStatus = {}
@@ -39,16 +43,18 @@ TaskStatus.FINSHED = 2
 export default {
     data(){
         return {
-            tasks:[
-                {id: 1, name: "任务1", createtime:Date.now(), status: TaskStatus.WAITING, process: 0 },
-                {id: 2, name: "任务2", createtime:Date.now(), status: TaskStatus.RUNNING, process: 20 },
-                {id: 3, name: "任务3", createtime:Date.now(), status: TaskStatus.RUNNING, process: 10 },
-                {id: 4, name: "任务4", createtime:Date.now(), status: TaskStatus.FINSHED, process: 100 },
-                {id: 5, name: "任务5", createtime:Date.now(), status: TaskStatus.FINSHED, process: 100 },
-            ]
+            tasks:[]
         }
     },
+    created(){
+        this.getTasks()
+    },
     methods:{
+        getTasks(){
+            queryTasks().then(res => {
+                this.tasks = res.data.data.tasks
+            })
+        },
         statusName(taskStatus){
             switch(taskStatus){
                 case TaskStatus.WAITING: return "等待中"
@@ -59,7 +65,7 @@ export default {
             }
         },
         timeTranslate(time){
-            return moment(time).format("YYYY-MM-DD")
+            return moment(time).format("YYYY-MM-DD HH:mm:ss")
         },
         go2TaskDetail(task){
             this.$router.push({

@@ -50,6 +50,8 @@ router.beforeEach(async (to, from, next) => { //执行路由自己的钩子
     next()
 })
 
+store.dispatch("init")
+
 export default {
     router,
     store,

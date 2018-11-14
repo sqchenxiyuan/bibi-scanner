@@ -9,8 +9,8 @@ servers:
     url: https://virtserver.swaggerhub.com/bibiscaner/web/0.0.1
 
 tags:
-  - name: 权限管控
-    description: 登录接口
+  - name: 系统
+    description: 系统接口
   - name: 任务
     description: 任务相关接口
   - name: 节点
@@ -22,7 +22,7 @@ paths:
   /login:
     post:
       tags:
-        - 权限管控
+        - 系统
       description: 登录接口,传入密码获取TOKEN
       requestBody:
         required: true
@@ -59,7 +59,7 @@ paths:
   /logout:
     post:
       tags:
-        - 权限管控
+        - 系统
       description: 登出接口
       parameters:
         - $ref: "#/components/parameters/tokenHeaderParam"
@@ -70,6 +70,47 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/successResonse"
+        400:
+          $ref: '#/components/responses/400Error'
+  /sysinfo:
+    get:
+      tags:
+        - 系统
+      description: 获取系统信息
+      responses:
+        200:
+          description: 获取系统成功
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/successResonse"
+                  - type: object
+                    required:
+                      - data
+                    properties:
+                      data:
+                        type: object
+                        required:
+                          - numberOfTasks
+                          - numberOfWaitingTasks
+                          - numberOfRunningTasks
+                          - numberOfFinishTasks
+                          - numberOfNodes
+                          - numberOfPlugins
+                        properties:
+                          numberOfTasks:
+                            type: integer
+                          numberOfWaitingTasks:
+                            type: integer
+                          numberOfRunningTasks:
+                            type: integer
+                          numberOfFinishTasks:
+                            type: integer
+                          numberOfNodes:
+                            type: integer
+                          numberOfPlugins:
+                            type: integer
         400:
           $ref: '#/components/responses/400Error'
 

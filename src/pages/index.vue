@@ -9,15 +9,15 @@
         </div>
         <div class="md-layout md-gutter" style="margin-top: 10px">
             <md-content class="md-layout-item tasks-statu md-elevation-2 wait">
-                <p class="count">1</p>
+                <p class="count">{{sysinfo.numberOfWaitingTasks}}</p>
                 <p class="info-text md-title">等待中</p>
             </md-content>
             <md-content class="md-layout-item tasks-statu md-elevation-2 process">
-                <p class="count">12</p>
+                <p class="count">{{sysinfo.numberOfRunningTasks}}</p>
                 <p class="info-text md-title">进行中</p>
             </md-content>
             <md-content class="md-layout-item tasks-statu md-elevation-2 success">
-                <p class="count">999</p>
+                <p class="count">{{sysinfo.numberOfFinishTasks}}</p>
                 <p class="info-text md-title">已完成</p>
             </md-content>
         </div>
@@ -36,6 +36,14 @@ import ControlerCard from "../components/card-controler.vue"
 import TasksListCard from "../components/cards/card-taskslist.vue"
 
 export default {
+    computed:{
+        sysinfo(){
+            return this.$store.state.sysinfo
+        }
+    },
+    created(){
+        this.$store.dispatch("updateSysInfo")
+    },
     components:{
         InfoCard,
         ControlerCard,
