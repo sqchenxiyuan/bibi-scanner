@@ -17,6 +17,7 @@ module.exports = {
     },
     resolve:{
         alias:{
+            "@": path.resolve(__dirname, "../src"),
             "@cssvar": path.resolve(__dirname, "../src/styles/variables.scss"),
         }
     },
