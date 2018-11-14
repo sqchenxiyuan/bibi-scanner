@@ -8,6 +8,7 @@
         "build": "cross-env NODE_ENV=production webpack --inline --progress --config build/webpack.config.prod.js"
     },
     "dependencies": {
+        "eslint": "5.9.0",
         "axios": "0.18.0",
         "vue": "2.5.17",
         "vue-router": "2.8.1",

@@ -654,10 +654,12 @@ components:
           type: string
         lastactivetime:
           type: string
-        host:
+        lastactivehost:
           type: string
-        port:
+        lastactiveport:
           type: integer
+        active:
+          type: boolean
         secretkey:
           type: string
 
