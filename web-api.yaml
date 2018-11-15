@@ -670,12 +670,15 @@ components:
         - id
         - name
         - description
+        - author
       properties:
         id:
           type: string
         name:
           type: string
         description:
+          type: string
+        author:
           type: string
         
 

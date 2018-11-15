@@ -1,6 +1,6 @@
 import axios from "./axios-instance.js"
 
-export function queryPlugins(obj){
+export function queryPlugins(obj = {}){
     let {
         offset,
         limit,
@@ -14,7 +14,8 @@ export function queryPlugins(obj){
             limit,
             sort,
             filter
-        }
+        },
+        baseURL: "https://www.easy-mock.com/mock/5bebcb08aa71eb233ec34709/bibiscan"
     })
 }
 

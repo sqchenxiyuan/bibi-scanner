@@ -16,6 +16,14 @@
                 </template>
             </md-select>
         </md-field>
+        <md-field>
+            <label>扫描节点</label>
+            <md-select v-model="form.nodes" name="nodes" id="nodes" multiple>
+                <template v-for="node in nodes">
+                    <md-option :key="node.id" :value="node.id">{{node.name}}</md-option>
+                </template>
+            </md-select>
+        </md-field>
         <md-card-actions>
             <md-button class="md-primary" @click="cancel">取消</md-button>
             <md-button class="md-primary" @click="submit">确认</md-button>
@@ -31,18 +39,16 @@ export default {
                 taskname: "",
                 target: "",
                 plugins: [],
-            },
-            plugins:[
-                {name: "漏洞1", id:1},
-                {name: "漏洞2", id:2},
-                {name: "漏洞3", id:3},
-                {name: "漏洞4", id:4},
-                {name: "漏洞5", id:5},
-                {name: "漏洞6", id:6},
-                {name: "漏洞7", id:7},
-                {name: "漏洞8", id:8},
-                {name: "漏洞9", id:9},
-            ]
+                nodes: []
+            }
+        }
+    },
+    computed:{
+        plugins(){
+            return this.$store.state.pluginsinfo.plugins
+        },
+        nodes(){
+            return this.$store.state.nodesinfo.nodes
         }
     },
     methods:{

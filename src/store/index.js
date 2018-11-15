@@ -2,6 +2,7 @@ import { login } from "../interfaces/login.js"
 
 import sysinfoModule from "./sysinfo.js"
 import nodesInfoModule from "./nodes.js"
+import pluginsInfoModule from "./plugins.js"
 
 let config = {
     state:{
@@ -30,7 +31,8 @@ let config = {
     },
     modules:{
         sysinfo: sysinfoModule,
-        nodesinfo: nodesInfoModule
+        nodesinfo: nodesInfoModule,
+        pluginsinfo: pluginsInfoModule
     }
 }
 

@@ -4,6 +4,7 @@
             <md-table-row>
                 <md-table-head md-numeric width="50px">插件编号</md-table-head>
                 <md-table-head>插件名称</md-table-head>
+                <md-table-head>插件作者</md-table-head>
                 <md-table-head>插件简介</md-table-head>
                 <md-table-head style="width:100px">操作</md-table-head>
             </md-table-row>
@@ -11,13 +12,22 @@
                 <md-table-row :key="plugin.id">
                     <md-table-cell md-numeric width="50px">{{plugin.id}}</md-table-cell>
                     <md-table-cell>{{plugin.name}}</md-table-cell>
+                    <md-table-cell>{{plugin.author}}</md-table-cell>
                     <md-table-cell>{{plugin.description}}</md-table-cell>
                     <md-table-cell>
-                        <md-button class="md-primary">详情</md-button>
+                        <md-button class="md-accent" @click="try2deletePlugin(plugin)">删除</md-button>
                     </md-table-cell>
                 </md-table-row>
             </template>
         </md-table>
+         <md-dialog-confirm
+            :md-active.sync="deleteActive"
+            md-title="确认删除该插件?"
+            md-content="确认删除该插件?删除该插件,只是不再看到,但是在结果报告中依然看的到插件!"
+            md-confirm-text="确认"
+            md-cancel-text="取消"
+            @md-cancel="deleteActive = false"
+            @md-confirm="deletePlugin" />
     </md-card>
 </template>
 
@@ -25,24 +35,22 @@
 export default {
     data(){
         return {
-            plugins:[
-                {id: "poc-1", name: "插件1", description:"扫描XXX脆弱性"},
-                {id: "poc-2", name: "插件2", description:"扫描XXX脆弱性"},
-                {id: "poc-3", name: "插件3", description:"扫描XXX脆弱性"},
-                {id: "poc-4", name: "插件4", description:"扫描XXX脆弱性"},
-                {id: "poc-5", name: "插件5", description:"扫描XXX脆弱性"},
-            ]
+            deletingPlugin: null,
+            deleteActive: false
+        }
+    },
+    computed:{
+        plugins(){
+            return this.$store.state.pluginsinfo.plugins
         }
     },
     methods:{
-        statusName(taskStatus){
-            switch(taskStatus){
-                case TaskStatus.WAITING: return "等待中"
-                case TaskStatus.RUNNING: return "扫描中"
-                case TaskStatus.FINSHED: return "已完成"
-                default:
-                    return "未知"
-            }
+        try2deletePlugin(plugin){
+            this.deletingPlugin = plugin
+            this.deleteActive = true
+        },
+        deletePlugin(){
+            //TODO: 删除插件
         }
     }
 }
