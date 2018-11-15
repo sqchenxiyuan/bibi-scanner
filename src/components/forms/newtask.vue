@@ -3,10 +3,12 @@
         <md-field>
             <label for="taskname">任务名称</label>
             <md-input id="taskname" name="taskname" v-model="form.taskname"></md-input>
+            <span class="md-error" v-if="!$v.form.taskname.required">请输</span>
         </md-field>
         <md-field>
             <label>扫描目标</label>
             <md-input id="target" name="target" v-model="form.target"></md-input>
+            <span class="md-error" v-if="!$v.form.target.required">输入密码</span>
         </md-field>
         <md-field>
             <label>扫描插件</label>
@@ -32,6 +34,13 @@
 </template>
 
 <script>
+import {
+    required,
+    email,
+    minLength,
+    maxLength
+} from 'vuelidate/lib/validators'
+
 export default {
     data(){
         return {
@@ -40,6 +49,22 @@ export default {
                 target: "",
                 plugins: [],
                 nodes: []
+            }
+        }
+    },
+    validations: {
+        form: {
+            taskname: {
+                required
+            },
+            target: {
+                required
+            },
+            plugins:{
+                required
+            },
+            nodes: {
+                required
             }
         }
     },
