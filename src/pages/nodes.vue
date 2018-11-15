@@ -5,24 +5,12 @@
 </template>
 
 <script>
-import { queryNodes } from "@/interfaces/nodes.js";
-
 import NodeCard from "../components/cards/card-node.vue"
 
 export default {
-    data(){
-        return {
-            nodes:[]
-        }
-    },
-    created(){
-        this.getNodes()
-    },
-    methods:{
-        getNodes(){
-            queryNodes().then(res => {
-                this.nodes = res.data.data.nodes
-            })
+    computed:{
+        nodes(){
+            return this.$store.state.nodesinfo.nodes
         }
     },
     components:{

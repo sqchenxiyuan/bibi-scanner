@@ -34,6 +34,19 @@
                 <div class="md-layout-item">{{node.lastactivetime ? node.lastactivehost + ":" + node.lastactiveport: "未知"}}</div>
             </div>
         </md-card-content>
+        <md-card-actions>
+            <md-button @click="pingNode">Ping</md-button>
+            <md-button style="color:red" @click="deleteActive = true">删除</md-button>
+        </md-card-actions>
+        <md-dialog-confirm
+            :md-active.sync="deleteActive"
+            md-title="确认删除该节点?"
+            md-content="确认删除该节点?删除该节点后,属于该节点的未完成的任务会被删除!"
+            md-confirm-text="确认"
+            md-cancel-text="取消"
+            @md-cancel="deleteActive = false"
+            @md-confirm="deleteNode" />
+        <md-progress-bar v-if="processing" md-mode="indeterminate" style="position:absolute;top: 0;left:0;right:0"></md-progress-bar>
     </md-card>
 </template>
 
@@ -43,7 +56,11 @@ import moment from "moment"
 export default {
     data(){
         return {
-            viewKey: false
+            viewKey: false,
+            
+            processing: false,
+
+            deleteActive: false
         }
     },
     props:{
@@ -52,6 +69,22 @@ export default {
     methods:{
         timeTranslate(time){
             return moment(time).format("YYYY-MM-DD HH:mm:ss")
+        },
+        pingNode(){
+            this.processing = true
+
+            setTimeout(_ => {
+                this.processing = false
+                //TODO:检测节点
+            }, 1500)
+        },
+        deleteNode(){
+            this.processing = true
+
+            setTimeout(_ => {
+                this.processing = false
+                //TODO:删除节点
+            }, 1500)
         }
     }
 }
