@@ -44,10 +44,7 @@ import {
 
 import { validationMixin } from 'vuelidate'
 import {
-    required,
-    email,
-    minLength,
-    maxLength
+    required
 } from 'vuelidate/lib/validators'
 
 export default {
