@@ -33,7 +33,6 @@ import {
 } from 'vuelidate/lib/validators'
 
 export default {
-    name: 'FormValidation',
     mixins: [validationMixin],
     data: () => ({
         form: {
@@ -75,7 +74,6 @@ export default {
         },
         validateLogin () {
             this.$v.$touch()
-            console.log(this.$v.$invalid)
 
             if (!this.$v.$invalid) {
                 this.login()
