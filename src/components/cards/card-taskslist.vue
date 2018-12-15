@@ -12,7 +12,11 @@
 
             <template v-for="task in tasks">
                 <md-table-row :key="task.id">
-                    <md-table-cell md-numeric width="50px">{{task.id}}</md-table-cell>
+                    <md-table-cell md-numeric width="50px">
+                        <div :title="task.id" style="max-width:100px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                            {{task.id}}
+                        </div>
+                    </md-table-cell>
                     <md-table-cell>{{task.name}}</md-table-cell>
                     <md-table-cell>{{timeTranslate(task.createtime)}}</md-table-cell>
                     <md-table-cell>{{statusName(task.status)}}</md-table-cell>
@@ -52,7 +56,7 @@ export default {
     methods:{
         getTasks(){
             queryTasks().then(res => {
-                this.tasks = res.data.data.tasks
+                this.tasks = res.data.tasks
             })
         },
         statusName(taskStatus){

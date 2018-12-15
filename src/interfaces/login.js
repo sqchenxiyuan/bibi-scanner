@@ -16,7 +16,5 @@ export function authcheck(obj){
 }
 
 export function getSystemInfo(){
-    return axios.get("/sysinfo", {
-        baseURL: "https://www.easy-mock.com/mock/5bebcb08aa71eb233ec34709/bibiscan"
-    })
+    return axios.get("/sysinfo")
 }

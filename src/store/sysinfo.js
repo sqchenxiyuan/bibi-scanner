@@ -17,7 +17,7 @@ let config = {
         updateSysInfo({state}){
 
             getSystemInfo().then(res => {
-                let data = res.data.data
+                let data = res.data
                 state.numberOfTasks = data.numberOfTasks
                 state.numberOfNodes = data.numberOfNodes
                 state.numberOfPlugins = data.numberOfPlugins

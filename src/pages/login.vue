@@ -68,7 +68,6 @@ export default {
             }).then(_ => {
                 this.sending = false
                 this.clearForm()
-                console.log(123)
 
                 this.$router.push("/")
             })

@@ -26,7 +26,7 @@ export default {
     methods:{
         getTasks(){
             queryTasks().then(res => {
-                this.tasks = res.data.data.tasks
+                this.tasks = res.data.tasks
             })
         },
     },
