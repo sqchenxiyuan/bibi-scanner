@@ -1,4 +1,4 @@
-import IpSubnetCalculator from "ip-subnet-calculator"
+import ip from "ip"
 
 const ipRangeStrCheckResult = {
     SUCCESS: 0,
@@ -19,8 +19,8 @@ function ipRangeStrCheck(iprangestr, splitchar = "-"){
         to = from
     }
 
-    if(IpSubnetCalculator.isIp(from) && IpSubnetCalculator.isIp(to)){
-        if(IpSubnetCalculator.toDecimal(from) <= IpSubnetCalculator.toDecimal(to)){
+    if(ip.isV4Format(from) && ip.isV4Format(to)){
+        if(ip.toLong(from) <= ip.toLong(to)){
             return ipRangeStrCheckResult.SUCCESS
         } else {
             return ipRangeStrCheckResult.ERROR_RANGE

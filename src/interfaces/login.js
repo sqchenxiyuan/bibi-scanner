@@ -5,13 +5,14 @@ export function login(obj){
         password
     } = obj
 
-    return axios.post("/login", {
+    return axios.post("/auth", {
+        username: "admin",
         password
     })
 }
 
-export function logout(obj){
-    return axios.post("/logout")
+export function authcheck(obj){
+    return axios.get("/authcheck")
 }
 
 export function getSystemInfo(){

@@ -39,7 +39,7 @@
         "material-design-icons": "3.0.1",
         "moment": "2.22.2",
         "element-ui": "2.4.9",
-        "ip-subnet-calculator": "1.1.8"
+        "ip": "1.1.5"
     },
     "browserslist": {
         "production": [
