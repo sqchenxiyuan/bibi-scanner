@@ -7,6 +7,21 @@ const ipRangeStrCheckResult = {
     ERROR_IP: 3, //IP输入错误
 }
 
+function getIPRange(iprangestr, splitchar = "-"){
+    let iparr = iprangestr.split(splitchar)
+
+    let [from, to] = iparr
+
+    if(iparr.length === 1){
+        to = from
+    }
+    
+    return {
+        from: ip.toLong(from),
+        to: ip.toLong(to),
+    }
+}
+
 function ipRangeStrCheck(iprangestr, splitchar = "-"){
     
     let iparr = iprangestr.split(splitchar)
@@ -32,5 +47,6 @@ function ipRangeStrCheck(iprangestr, splitchar = "-"){
 
 export {
     ipRangeStrCheckResult,
-    ipRangeStrCheck
+    ipRangeStrCheck,
+    getIPRange
 }

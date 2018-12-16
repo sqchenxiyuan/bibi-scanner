@@ -12,8 +12,8 @@
                     <i v-if="viewKey" class="btn-key-view el-icon-circle-close-outline" @click="viewKey = !viewKey"></i>
                     <i v-else class="btn-key-view el-icon-view" @click="viewKey = !viewKey"></i>
                 </div>
-                <div class="md-layout-item">
-                    {{viewKey ? node.secretkey : "********************************"}}
+                <div class="md-layout-item" style="word-break: break-all;">
+                    {{viewKey ? node.key : "********************************"}}
                 </div>
             </div>
             <md-divider></md-divider>
@@ -27,11 +27,11 @@
             </div>
             <div class="md-layout">
                 <div class="md-layout-item" style="max-width: 50px">时间</div>
-                <div class="md-layout-item">{{node.lastactivetime ? timeTranslate(node.lastactivetime) : "未知"}}</div>
+                <div class="md-layout-item">{{node.active ? timeTranslate(node.lastActivetime) : "未知"}}</div>
             </div>
             <div class="md-layout md-alignment-center-left">
                 <div class="md-layout-item" style="max-width: 50px">地址</div>
-                <div class="md-layout-item">{{node.lastactivetime ? node.lastactivehost + ":" + node.lastactiveport: "未知"}}</div>
+                <div class="md-layout-item">{{node.active ? ipTranslate(node.ip) + ":" + node.port: "未知"}}</div>
             </div>
         </md-card-content>
         <md-card-actions>
@@ -51,7 +51,9 @@
 </template>
 
 <script>
+import ip from "ip"
 import moment from "moment"
+import { pingNode } from "@/interfaces/nodes.js"
 
 export default {
     data(){
@@ -70,13 +72,21 @@ export default {
         timeTranslate(time){
             return moment(time).format("YYYY-MM-DD HH:mm:ss")
         },
+        ipTranslate(ipnum){
+            return ip.fromLong(ipnum)
+        },
         pingNode(){
             this.processing = true
-
-            setTimeout(_ => {
+            pingNode({
+                nodeId: this.node.id
+            }).then(res => {
+                this.node.active = res.data.active
+                this.node.lastActivetime = res.data.lastActivetime
+            }).catch(err => {
+                this.node.active = 0
+            }).then(_ => {
                 this.processing = false
-                //TODO:检测节点
-            }, 1500)
+            })
         },
         deleteNode(){
             this.processing = true

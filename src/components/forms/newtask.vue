@@ -39,13 +39,16 @@
 <script>
 import {
     ipRangeStrCheckResult,
-    ipRangeStrCheck
+    ipRangeStrCheck,
+    getIPRange
 } from "../../utils/ip-check.js"
 
 import { validationMixin } from 'vuelidate'
 import {
     required
 } from 'vuelidate/lib/validators'
+
+import { createTask } from "@/interfaces/tasks.js"
 
 export default {
     mixins: [validationMixin],
@@ -108,7 +111,17 @@ export default {
         submit(){
             console.log(this.$v.form.target)
             this.$v.$touch()
+            console.log(this.form)
             // this.$emit("submit")
+            let form = this.form
+            let data = {
+                name: form.name,
+                startIP: getIPRange(form.target).from,
+                endIP: getIPRange(form.target).to,
+                plugins: form.plugins,
+                nodeId: form.node
+            }
+            console.log(data)
         }
     }
 }

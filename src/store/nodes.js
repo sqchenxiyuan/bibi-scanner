@@ -11,7 +11,7 @@ let config = {
         },
         updateNodes({state}){
             return queryNodes().then(res => {
-                state.nodes = res.data.data.nodes
+                state.nodes = res.data.nodes
             })
         }
     }

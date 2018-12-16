@@ -21,14 +21,16 @@ export function queryTasks(obj = {}){
 export function createTask(obj){
     let {
         name,
-        target,
+        startIP,
+        endIP,
         plugins,
         nodes
     } = obj
 
     return axios.post("/tasks", {
         name,
-        target,
+        startIP,
+        endIP,
         plugins,
         nodes
     })

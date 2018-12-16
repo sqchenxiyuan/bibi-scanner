@@ -10,7 +10,7 @@ let config = {
         },
         updatePlugins({state}){
             return queryPlugins().then(res => {
-                state.plugins = res.data.data.plugins
+                state.plugins = res.data.plugins
             })
         }
     }

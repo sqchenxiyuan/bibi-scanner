@@ -15,7 +15,7 @@ let config = {
         load4Local(state){
             state.token = localStorage.getItem("TOKEN") || ""
         },
-        clearToken(){
+        clearToken(state){
             state.token = ""
         }
     },
@@ -25,15 +25,14 @@ let config = {
         }
     },
     actions:{
-        // init({dispatch}){
-        //     return dispatch("initmodule")
-        // },
-        async init({state, commit}){
+        async init({state, commit, dispatch}){
             commit("load4Local")
             if(state.token){
                 if(!await authcheck().then(_ => true).catch(_ => false)){
                     commit("clearToken")
                     commit("save2Local")
+                } else {
+                    dispatch("initmodule")
                 }
             }
         },

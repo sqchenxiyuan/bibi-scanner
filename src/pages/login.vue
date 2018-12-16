@@ -68,7 +68,7 @@ export default {
             }).then(_ => {
                 this.sending = false
                 this.clearForm()
-
+                this.$store.dispatch("initmodule")
                 this.$router.push("/")
             })
         },
