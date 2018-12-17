@@ -24,7 +24,7 @@ export function createTask(obj){
         startIP,
         endIP,
         plugins,
-        nodes
+        nodeId
     } = obj
 
     return axios.post("/tasks", {
@@ -32,7 +32,7 @@ export function createTask(obj){
         startIP,
         endIP,
         plugins,
-        nodes
+        nodeId
     })
 }
 

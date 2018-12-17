@@ -22,12 +22,12 @@
         </md-field>
         <md-field :class="getValidationClass('plugins')">
             <label>扫描节点</label>
-            <md-select v-model="form.nodes" name="nodes" id="nodes" multiple>
+            <md-select v-model="form.nodeId" name="nodes" id="nodes">
                 <template v-for="node in nodes">
                     <md-option :key="node.id" :value="node.id">{{node.name}}</md-option>
                 </template>
             </md-select>
-            <span class="md-error" v-if="!$v.form.nodes.required">请选择需要分配的节点</span>
+            <span class="md-error" v-if="!$v.form.nodeId.required">请选择需要分配的节点</span>
         </md-field>
         <md-card-actions>
             <md-button class="md-primary" @click="cancel">取消</md-button>
@@ -47,7 +47,6 @@ import { validationMixin } from 'vuelidate'
 import {
     required
 } from 'vuelidate/lib/validators'
-
 import { createTask } from "@/interfaces/tasks.js"
 
 export default {
@@ -58,7 +57,7 @@ export default {
                 name: "",
                 target: "",
                 plugins: [],
-                nodes: []
+                nodeId: ""
             }
         }
     },
@@ -80,10 +79,8 @@ export default {
             },
             plugins:{
             },
-            nodes: {
-                required(value){
-                    return  value.length > 0
-                }
+            nodeId: {
+                required
             }
         }
     },
@@ -109,19 +106,26 @@ export default {
             this.$emit("cancel")
         },
         submit(){
-            console.log(this.$v.form.target)
             this.$v.$touch()
-            console.log(this.form)
-            // this.$emit("submit")
+            if (!this.$v.$invalid) {
+                this.createTask()
+            }
+        },
+        createTask(){
             let form = this.form
-            let data = {
+            createTask({
                 name: form.name,
                 startIP: getIPRange(form.target).from,
                 endIP: getIPRange(form.target).to,
                 plugins: form.plugins,
-                nodeId: form.node
-            }
-            console.log(data)
+                nodeId: form.nodeId
+            }).then(res => {
+                this.$store.dispatch("updateTasks")
+                this.$router.push("/tasks")
+                this.$emit("submit")
+            }).catch(err => {
+                alert("创建失败")
+            })
         }
     }
 }
