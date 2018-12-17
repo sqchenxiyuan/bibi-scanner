@@ -70,6 +70,8 @@ export default {
                 this.clearForm()
                 this.$store.dispatch("initmodule")
                 this.$router.push("/")
+            }).catch(err => {
+                alert("验证错误")
             })
         },
         validateLogin () {

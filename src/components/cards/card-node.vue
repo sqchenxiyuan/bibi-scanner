@@ -27,16 +27,16 @@
             </div>
             <div class="md-layout">
                 <div class="md-layout-item" style="max-width: 50px">时间</div>
-                <div class="md-layout-item">{{node.active ? timeTranslate(node.lastActivetime) : "未知"}}</div>
+                <div class="md-layout-item">{{node.lastActivetime ? timeTranslate(node.lastActivetime) : "未知"}}</div>
             </div>
             <div class="md-layout md-alignment-center-left">
                 <div class="md-layout-item" style="max-width: 50px">地址</div>
-                <div class="md-layout-item">{{node.active ? ipTranslate(node.ip) + ":" + node.port: "未知"}}</div>
+                <div class="md-layout-item">{{node.ip ? ipTranslate(node.ip) + ":" + node.port: "未知"}}</div>
             </div>
         </md-card-content>
         <md-card-actions>
-            <md-button @click="pingNode">Ping</md-button>
-            <md-button style="color:red" @click="deleteActive = true">删除</md-button>
+            <md-button v-if="node.ip" @click="pingNode">Ping</md-button>
+            <!-- <md-button style="color:red" @click="deleteActive = true">删除</md-button> -->
         </md-card-actions>
         <md-dialog-confirm
             :md-active.sync="deleteActive"

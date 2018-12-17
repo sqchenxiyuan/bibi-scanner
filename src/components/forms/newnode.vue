@@ -17,6 +17,7 @@ import { validationMixin } from 'vuelidate'
 import {
     required,
 } from 'vuelidate/lib/validators'
+import { createNode } from "@/interfaces/nodes"
 
 export default {
     mixins: [validationMixin],
@@ -49,7 +50,20 @@ export default {
         },
         submit(){
             this.$v.$touch()
-            // this.$emit("submit")
+            if (!this.$v.$invalid) {
+                this.createNode()
+            }
+        },
+        createNode(){
+            createNode({
+                name: this.form.name
+            }).then(_ => {
+                this.$store.dispatch("updateNodes")
+                this.$router.push("/nodes")
+                this.$emit("submit")
+            }).catch(err => {
+                alert("创建失败")
+            })
         }
     }
 }
