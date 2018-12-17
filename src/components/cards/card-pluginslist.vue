@@ -4,19 +4,23 @@
             <md-table-row>
                 <md-table-head md-numeric width="50px">插件编号</md-table-head>
                 <md-table-head>插件名称</md-table-head>
-                <md-table-head>插件作者</md-table-head>
+                <!-- <md-table-head>插件作者</md-table-head> -->
                 <md-table-head>插件简介</md-table-head>
-                <md-table-head style="width:100px">操作</md-table-head>
+                <!-- <md-table-head style="width:100px">操作</md-table-head> -->
             </md-table-row>
             <template v-for="plugin in plugins">
                 <md-table-row :key="plugin.id">
-                    <md-table-cell md-numeric width="50px">{{plugin.id}}</md-table-cell>
-                    <md-table-cell>{{plugin.name}}</md-table-cell>
-                    <md-table-cell>{{plugin.author}}</md-table-cell>
-                    <md-table-cell>{{plugin.description}}</md-table-cell>
-                    <md-table-cell>
-                        <md-button class="md-accent" @click="try2deletePlugin(plugin)">删除</md-button>
+                    <md-table-cell md-numeric width="50px">
+                        <div style="max-width:100px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                            {{plugin.id}}
+                        </div>
                     </md-table-cell>
+                    <md-table-cell>{{plugin.name}}</md-table-cell>
+                    <!-- <md-table-cell>{{plugin.author}}</md-table-cell> -->
+                    <md-table-cell>{{plugin.description}}</md-table-cell>
+                    <!-- <md-table-cell>
+                        <md-button class="md-accent" @click="try2deletePlugin(plugin)">删除</md-button>
+                    </md-table-cell> -->
                 </md-table-row>
             </template>
         </md-table>

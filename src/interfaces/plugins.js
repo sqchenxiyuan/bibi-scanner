@@ -24,7 +24,7 @@ export function uploadPlugin(obj){
     } = obj
 
     let formdata = new FormData()
-    formdata.set("file", file)
+    formdata.set("plugin", file)
 
     return axios.post("/plugins", formdata)
 }
