@@ -120,7 +120,6 @@ export default {
                 plugins: form.plugins,
                 nodeId: form.nodeId
             }).then(res => {
-                this.$store.dispatch("updateTasks")
                 this.$router.push("/tasks")
                 this.$emit("submit")
             }).catch(err => {

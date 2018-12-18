@@ -4,6 +4,14 @@ let config = {
     state:{
         plugins: []
     },
+    getters:{
+        pluginsIdMap(state){
+            let plugins = state.plugins
+            let map = new Map()
+            plugins.forEach(plugin => map.set(plugin.id, plugin))
+            return map
+        }
+    },
     actions:{
         initmodule({dispatch}){
             return dispatch("updatePlugins")
