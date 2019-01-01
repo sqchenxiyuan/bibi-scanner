@@ -93,7 +93,11 @@
                                     无安全风险
                                 </template>
                                 <template v-else>
-                                    <div v-for="warning in port.warnings">{{warning.description}} from {{warning.plugin}}</div>
+                                    <div v-for="warning in port.warnings">{{warning.description}} from 
+                                        <el-tag size="mini" class="md-primary">
+                                            {{pluginName(warning.plugin)}}
+                                        </el-tag>
+                                    </div>
                                 </template>
                             </el-collapse-item>
                         </el-collapse>
