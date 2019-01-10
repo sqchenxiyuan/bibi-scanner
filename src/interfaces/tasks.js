@@ -44,14 +44,6 @@ export function getTaskDetail(obj){
     return axios.get(`/tasks/${taskId}`)
 }
 
-export function deletTaskById(obj){
-    let {
-        taskId
-    } = obj
-
-    return axios.delete(`/tasks/${taskId}`)
-}
-
 export function downloadTaskReport(obj){
     let {
         taskId

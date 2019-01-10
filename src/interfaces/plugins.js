@@ -28,11 +28,3 @@ export function uploadPlugin(obj){
 
     return axios.post("/plugins", formdata)
 }
-
-export function deletPluginById(obj){
-    let {
-        pluginId
-    } = obj
-
-    return axios.delete(`/plugins/${pluginId}`)
-}

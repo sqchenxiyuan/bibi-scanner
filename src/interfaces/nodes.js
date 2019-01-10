@@ -28,22 +28,6 @@ export function createNode(obj){
     })
 }
 
-export function getNodeById(obj){
-    let {
-        nodeId
-    } = obj
-
-    return axios.get(`/nodes/${nodeId}`)
-}
-
-export function deletNodeById(obj){
-    let {
-        nodeId
-    } = obj
-
-    return axios.delete(`/nodes/${nodeId}`)
-}
-
 export function pingNode(obj){
     let {
         nodeId
