@@ -12,6 +12,21 @@
             <span class="md-error" v-else-if="!$v.form.target.isStringOk">输入有效的目标字符串</span>
             <span class="md-error" v-else-if="!$v.form.target.isRangeOk">输入合理的IP范围</span>
         </md-field>
+        <div class="md-layout">
+            <md-field class="md-layout-item" style="margin-left:0" :class="getValidationClass('startPort')">
+                <label>起始端口</label>
+                <md-input id="startPort" name="target" v-model="form.startPort"></md-input>
+                <span class="md-error" v-if="!$v.form.startPort.required">输入扫描起始端口</span>
+                <span class="md-error" v-else-if="!$v.form.startPort.isPortNumber">输入有效的起始端口</span>
+            </md-field>
+            <md-field class="md-layout-item" style="margin-right:0" :class="getValidationClass('endPort')">
+                <label>结束端口</label>
+                <md-input id="endPort" name="target" v-model="form.endPort"></md-input>
+                <span class="md-error" v-if="!$v.form.endPort.required">输入扫描结束端口</span>
+                <span class="md-error" v-else-if="!$v.form.endPort.isPortNumber">输入有效的结束端口</span>
+                <span class="md-error" v-else-if="!$v.form.endPort.isBigger">结束端口必须大于等于起始端口</span>
+            </md-field>
+        </div>
         <md-field>
             <label>扫描插件</label>
             <md-select v-model="form.plugins" name="plugins" id="plugins" placeholder="请选择扫描的插件(非必选)" multiple>
@@ -56,6 +71,8 @@ export default {
             form:{
                 name: "",
                 target: "",
+                startPort: 0,
+                endPort: 65535,
                 plugins: [],
                 nodeId: ""
             }
@@ -69,7 +86,6 @@ export default {
             target: {
                 required,
                 isStringOk(value){
-                    console.log(ipRangeStrCheck(value))
                     return !(ipRangeStrCheck(value) === ipRangeStrCheckResult.ERROR_STRING 
                         || ipRangeStrCheck(value) === ipRangeStrCheckResult.ERROR_IP)
                 },
@@ -81,6 +97,21 @@ export default {
             },
             nodeId: {
                 required
+            },
+            startPort:{
+                required,
+                isPortNumber(value){
+                    return 0 <= value && value <= 65535
+                }
+            },
+            endPort:{
+                required,
+                isPortNumber(value){
+                    return 0 <= value && value <= 65535
+                },
+                isBigger(value){
+                    return value >= this.form.startPort
+                }
             }
         }
     },
@@ -118,7 +149,9 @@ export default {
                 startIP: getIPRange(form.target).from,
                 endIP: getIPRange(form.target).to,
                 plugins: form.plugins,
-                nodeId: form.nodeId
+                nodeId: form.nodeId,
+                startPort: parseInt(form.startPort),
+                endPort: parseInt(form.endPort)
             }).then(res => {
                 this.$router.push("/tasks")
                 this.$emit("submit")

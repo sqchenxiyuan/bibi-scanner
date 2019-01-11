@@ -25,6 +25,16 @@
                         <div class="md-layout-item">{{targetRange(task.startIP, task.endIP)}}</div>
                     </div>
                     <div class="md-layout-item md-layout">
+                        <div class="md-layout-item" style="min-width: 100px;max-width:100px">扫描起始端口:</div>
+                        <div class="md-layout-item">{{task.startPort}}</div>
+                    </div>
+                    <div class="md-layout-item md-layout">
+                        <div class="md-layout-item" style="min-width: 100px;max-width:100px">结束端口:</div>
+                        <div class="md-layout-item">{{task.endPort}}</div>
+                    </div>
+                </div>
+                <div class="md-layout">
+                    <div class="md-layout-item md-layout">
                         <div class="md-layout-item" style="min-width: 100px;max-width:100px">扫描插件:</div>
                         <div class="md-layout-item">
                             <el-tag size="mini" v-for="plugin in task.plugins" :key="plugin" class="md-primary">
@@ -32,7 +42,6 @@
                             </el-tag>
                         </div>
                     </div>
-                    <div class="md-layout-item md-layout"></div>
                 </div>
                 <div class="md-layout">
                     <div class="md-layout-item md-layout md-size-66 md-alignment-center-left">
@@ -87,10 +96,13 @@
                             <el-collapse-item v-for="port in activeHostData.ports" :key="port.port" :name="port.port">
                                 <template slot="title">
                                     :{{port.port}}
-                                    <span v-if="port.numberOfWarnings" style="display:inline-block;width:16px;"></span>{{port.numberOfWarnings}}x<i class="el-icon-warning"></i>
+                                    <span v-if="port.numberOfWarnings" style="display:inline-block;width:16px;"></span>
+                                    <template v-if="port.numberOfWarnings > 0">
+                                        {{port.numberOfWarnings}}x<i class="el-icon-warning"></i>
+                                    </template>
                                 </template>
                                 <template v-if="port.numberOfWarnings === 0">
-                                    无安全风险
+                                    未发现安全风险
                                 </template>
                                 <template v-else>
                                     <div v-for="warning in port.warnings">{{warning.description}} from 
